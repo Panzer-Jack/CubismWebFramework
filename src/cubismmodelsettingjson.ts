@@ -614,7 +614,6 @@ export class CubismModelSettingJson extends ICubismModelSetting {
    * @return false キーが存在しない
    */
   protected isExistPoseFile(): boolean {
-    console.log('isExistPoseFile')
     const node: Value = this._jsonValue.at(FrequestNode.FrequestNode_Pose)
     return !!node && !node.isNull() && !node.isError()
   }

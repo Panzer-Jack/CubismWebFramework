@@ -1,8 +1,8 @@
-import eslint from '@eslint/js';
-import tseslint from 'typescript-eslint';
-import globals from 'globals';
-import eslintConfigPrettier from 'eslint-config-prettier';
-import eslintPluginPrettier from 'eslint-plugin-prettier';
+import eslint from '@eslint/js'
+import eslintConfigPrettier from 'eslint-config-prettier'
+import eslintPluginPrettier from 'eslint-plugin-prettier'
+import globals from 'globals'
+import tseslint from 'typescript-eslint'
 
 export default tseslint.config(
   eslint.configs.recommended,
@@ -26,7 +26,7 @@ export default tseslint.config(
     },
     plugins:
     {
-      'prettier': eslintPluginPrettier,
+      prettier: eslintPluginPrettier,
     },
     rules:
     {
@@ -38,7 +38,7 @@ export default tseslint.config(
           arrowParens: 'avoid',
         },
       ],
-      camelcase: 'off',
+      'camelcase': 'off',
       '@typescript-eslint/naming-convention': [
         'warn',
         {
@@ -180,4 +180,4 @@ export default tseslint.config(
       '!src/**/*.ts',
     ],
   },
-);
+)

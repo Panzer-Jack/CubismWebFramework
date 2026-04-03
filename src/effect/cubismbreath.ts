@@ -5,8 +5,12 @@
  * that can be found at https://www.live2d.com/eula/live2d-open-software-license-agreement_en.html.
  */
 
-import { CubismIdHandle } from '../id/cubismid';
-import { CubismModel } from '../model/cubismmodel';
+import type { CubismIdHandle } from '../id/cubismid'
+import type { CubismModel } from '../model/cubismmodel'
+import type { csmVector } from '../type/csmvector'
+
+// Namespace definition for compatibility.
+import * as $ from './cubismbreath'
 
 /**
  * 呼吸機能
@@ -18,7 +22,7 @@ export class CubismBreath {
    * インスタンスの作成
    */
   public static create(): CubismBreath {
-    return new CubismBreath();
+    return new CubismBreath()
   }
 
   /**
@@ -27,7 +31,7 @@ export class CubismBreath {
    */
   public static delete(instance: CubismBreath): void {
     if (instance != null) {
-      instance = null;
+      instance = null
     }
   }
 
@@ -35,16 +39,16 @@ export class CubismBreath {
    * 呼吸のパラメータの紐づけ
    * @param breathParameters 呼吸を紐づけたいパラメータのリスト
    */
-  public setParameters(breathParameters: Array<BreathParameterData>): void {
-    this._breathParameters = breathParameters;
+  public setParameters(breathParameters: csmVector<BreathParameterData>): void {
+    this._breathParameters = breathParameters
   }
 
   /**
    * 呼吸に紐づいているパラメータの取得
    * @return 呼吸に紐づいているパラメータのリスト
    */
-  public getParameters(): Array<BreathParameterData> {
-    return this._breathParameters;
+  public getParameters(): csmVector<BreathParameterData> {
+    return this._breathParameters
   }
 
   /**
@@ -53,18 +57,18 @@ export class CubismBreath {
    * @param deltaTimeSeconds デルタ時間[秒]
    */
   public updateParameters(model: CubismModel, deltaTimeSeconds: number): void {
-    this._currentTime += deltaTimeSeconds;
+    this._currentTime += deltaTimeSeconds
 
-    const t: number = this._currentTime * 2.0 * Math.PI;
+    const t: number = this._currentTime * 2.0 * Math.PI
 
-    for (let i = 0; i < this._breathParameters.length; ++i) {
-      const data: BreathParameterData = this._breathParameters[i];
+    for (let i = 0; i < this._breathParameters.getSize(); ++i) {
+      const data: BreathParameterData = this._breathParameters.at(i)
 
       model.addParameterValueById(
         data.parameterId,
         data.offset + data.peak * Math.sin(t / data.cycle),
-        data.weight
-      );
+        data.weight,
+      )
     }
   }
 
@@ -72,11 +76,11 @@ export class CubismBreath {
    * コンストラクタ
    */
   public constructor() {
-    this._currentTime = 0.0;
+    this._currentTime = 0.0
   }
 
-  _breathParameters: Array<BreathParameterData>; // 呼吸にひもづいているパラメータのリスト
-  _currentTime: number; // 積算時間[秒]
+  _breathParameters: csmVector<BreathParameterData> // 呼吸にひもづいているパラメータのリスト
+  _currentTime: number // 積算時間[秒]
 }
 
 /**
@@ -96,28 +100,25 @@ export class BreathParameterData {
     offset?: number,
     peak?: number,
     cycle?: number,
-    weight?: number
+    weight?: number,
   ) {
-    this.parameterId = parameterId == undefined ? null : parameterId;
-    this.offset = offset == undefined ? 0.0 : offset;
-    this.peak = peak == undefined ? 0.0 : peak;
-    this.cycle = cycle == undefined ? 0.0 : cycle;
-    this.weight = weight == undefined ? 0.0 : weight;
+    this.parameterId = parameterId == undefined ? null : parameterId
+    this.offset = offset == undefined ? 0.0 : offset
+    this.peak = peak == undefined ? 0.0 : peak
+    this.cycle = cycle == undefined ? 0.0 : cycle
+    this.weight = weight == undefined ? 0.0 : weight
   }
 
-  parameterId: CubismIdHandle; // 呼吸をひもづけるパラメータID\
-  offset: number; // 呼吸を正弦波としたときの、波のオフセット
-  peak: number; // 呼吸を正弦波としたときの、波の高さ
-  cycle: number; // 呼吸を正弦波としたときの、波の周期
-  weight: number; // パラメータへの重み
+  parameterId: CubismIdHandle // 呼吸をひもづけるパラメータID\
+  offset: number // 呼吸を正弦波としたときの、波のオフセット
+  peak: number // 呼吸を正弦波としたときの、波の高さ
+  cycle: number // 呼吸を正弦波としたときの、波の周期
+  weight: number // パラメータへの重み
 }
-
-// Namespace definition for compatibility.
-import * as $ from './cubismbreath';
 // eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace Live2DCubismFramework {
-  export const BreathParameterData = $.BreathParameterData;
-  export type BreathParameterData = $.BreathParameterData;
-  export const CubismBreath = $.CubismBreath;
-  export type CubismBreath = $.CubismBreath;
+  export const BreathParameterData = $.BreathParameterData
+  export type BreathParameterData = $.BreathParameterData
+  export const CubismBreath = $.CubismBreath
+  export type CubismBreath = $.CubismBreath
 }

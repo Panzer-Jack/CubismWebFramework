@@ -5,17 +5,20 @@
  * that can be found at https://www.live2d.com/eula/live2d-open-software-license-agreement_en.html.
  */
 
-import { CubismIdHandle } from '../id/cubismid';
-import { CubismFramework } from '../live2dcubismframework';
-import { CubismJson } from '../utils/cubismjson';
+import type { CubismIdHandle } from '../id/cubismid'
+import { CubismFramework } from '../live2dcubismframework'
+import { CubismJson } from '../utils/cubismjson'
 
-const Meta = 'Meta';
-const UserDataCount = 'UserDataCount';
-const TotalUserDataSize = 'TotalUserDataSize';
-const UserData = 'UserData';
-const Target = 'Target';
-const Id = 'Id';
-const Value = 'Value';
+// Namespace definition for compatibility.
+import * as $ from './cubismmodeluserdatajson'
+
+const Meta = 'Meta'
+const UserDataCount = 'UserDataCount'
+const TotalUserDataSize = 'TotalUserDataSize'
+const UserData = 'UserData'
+const Target = 'Target'
+const Id = 'Id'
+const Value = 'Value'
 
 export class CubismModelUserDataJson {
   /**
@@ -24,14 +27,14 @@ export class CubismModelUserDataJson {
    * @param size      バッファのサイズ
    */
   public constructor(buffer: ArrayBuffer, size: number) {
-    this._json = CubismJson.create(buffer, size);
+    this._json = CubismJson.create(buffer, size)
   }
 
   /**
    * デストラクタ相当の処理
    */
   public release(): void {
-    CubismJson.delete(this._json);
+    CubismJson.delete(this._json)
   }
 
   /**
@@ -43,7 +46,7 @@ export class CubismModelUserDataJson {
       .getRoot()
       .getValueByString(Meta)
       .getValueByString(UserDataCount)
-      .toInt();
+      .toInt()
   }
 
   /**
@@ -56,7 +59,7 @@ export class CubismModelUserDataJson {
       .getRoot()
       .getValueByString(Meta)
       .getValueByString(TotalUserDataSize)
-      .toInt();
+      .toInt()
   }
 
   /**
@@ -70,7 +73,7 @@ export class CubismModelUserDataJson {
       .getValueByString(UserData)
       .getValueByIndex(i)
       .getValueByString(Target)
-      .getRawString();
+      .getRawString()
   }
 
   /**
@@ -86,8 +89,8 @@ export class CubismModelUserDataJson {
         .getValueByString(UserData)
         .getValueByIndex(i)
         .getValueByString(Id)
-        .getRawString()
-    );
+        .getRawString(),
+    )
   }
 
   /**
@@ -102,16 +105,13 @@ export class CubismModelUserDataJson {
       .getValueByString(UserData)
       .getValueByIndex(i)
       .getValueByString(Value)
-      .getRawString();
+      .getRawString()
   }
 
-  private _json: CubismJson;
+  private _json: CubismJson
 }
-
-// Namespace definition for compatibility.
-import * as $ from './cubismmodeluserdatajson';
 // eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace Live2DCubismFramework {
-  export const CubismModelUserDataJson = $.CubismModelUserDataJson;
-  export type CubismModelUserDataJson = $.CubismModelUserDataJson;
+  export const CubismModelUserDataJson = $.CubismModelUserDataJson
+  export type CubismModelUserDataJson = $.CubismModelUserDataJson
 }

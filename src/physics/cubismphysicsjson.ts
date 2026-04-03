@@ -5,55 +5,58 @@
  * that can be found at https://www.live2d.com/eula/live2d-open-software-license-agreement_en.html.
  */
 
-import { CubismIdHandle } from '../id/cubismid';
-import { CubismFramework } from '../live2dcubismframework';
-import { CubismVector2 } from '../math/cubismvector2';
-import { CubismJson } from '../utils/cubismjson';
+import type { CubismIdHandle } from '../id/cubismid'
+import { CubismFramework } from '../live2dcubismframework'
+import { CubismVector2 } from '../math/cubismvector2'
+import { CubismJson } from '../utils/cubismjson'
+
+// Namespace definition for compatibility.
+import * as $ from './cubismphysicsjson'
 
 // JSON keys
-const Position = 'Position';
-const X = 'X';
-const Y = 'Y';
-const Angle = 'Angle';
-const Type = 'Type';
-const Id = 'Id';
+const Position = 'Position'
+const X = 'X'
+const Y = 'Y'
+const Angle = 'Angle'
+const Type = 'Type'
+const Id = 'Id'
 
 // Meta
-const Meta = 'Meta';
-const EffectiveForces = 'EffectiveForces';
-const TotalInputCount = 'TotalInputCount';
-const TotalOutputCount = 'TotalOutputCount';
-const PhysicsSettingCount = 'PhysicsSettingCount';
-const Gravity = 'Gravity';
-const Wind = 'Wind';
-const VertexCount = 'VertexCount';
-const Fps = 'Fps';
+const Meta = 'Meta'
+const EffectiveForces = 'EffectiveForces'
+const TotalInputCount = 'TotalInputCount'
+const TotalOutputCount = 'TotalOutputCount'
+const PhysicsSettingCount = 'PhysicsSettingCount'
+const Gravity = 'Gravity'
+const Wind = 'Wind'
+const VertexCount = 'VertexCount'
+const Fps = 'Fps'
 
 // PhysicsSettings
-const PhysicsSettings = 'PhysicsSettings';
-const Normalization = 'Normalization';
-const Minimum = 'Minimum';
-const Maximum = 'Maximum';
-const Default = 'Default';
-const Reflect = 'Reflect';
-const Weight = 'Weight';
+const PhysicsSettings = 'PhysicsSettings'
+const Normalization = 'Normalization'
+const Minimum = 'Minimum'
+const Maximum = 'Maximum'
+const Default = 'Default'
+const Reflect = 'Reflect'
+const Weight = 'Weight'
 
 // Input
-const Input = 'Input';
-const Source = 'Source';
+const Input = 'Input'
+const Source = 'Source'
 
 // Output
-const Output = 'Output';
-const Scale = 'Scale';
-const VertexIndex = 'VertexIndex';
-const Destination = 'Destination';
+const Output = 'Output'
+const Scale = 'Scale'
+const VertexIndex = 'VertexIndex'
+const Destination = 'Destination'
 
 // Particle
-const Vertices = 'Vertices';
-const Mobility = 'Mobility';
-const Delay = 'Delay';
-const Radius = 'Radius';
-const Acceleration = 'Acceleration';
+const Vertices = 'Vertices'
+const Mobility = 'Mobility'
+const Delay = 'Delay'
+const Radius = 'Radius'
+const Acceleration = 'Acceleration'
 
 /**
  * physics3.jsonのコンテナ。
@@ -65,14 +68,14 @@ export class CubismPhysicsJson {
    * @param size バッファのサイズ
    */
   public constructor(buffer: ArrayBuffer, size: number) {
-    this._json = CubismJson.create(buffer, size);
+    this._json = CubismJson.create(buffer, size)
   }
 
   /**
    * デストラクタ相当の処理
    */
   public release(): void {
-    CubismJson.delete(this._json);
+    CubismJson.delete(this._json)
   }
 
   /**
@@ -80,22 +83,22 @@ export class CubismPhysicsJson {
    * @return 重力
    */
   public getGravity(): CubismVector2 {
-    const ret: CubismVector2 = new CubismVector2(0, 0);
+    const ret: CubismVector2 = new CubismVector2(0, 0)
     ret.x = this._json
       .getRoot()
       .getValueByString(Meta)
       .getValueByString(EffectiveForces)
       .getValueByString(Gravity)
       .getValueByString(X)
-      .toFloat();
+      .toFloat()
     ret.y = this._json
       .getRoot()
       .getValueByString(Meta)
       .getValueByString(EffectiveForces)
       .getValueByString(Gravity)
       .getValueByString(Y)
-      .toFloat();
-    return ret;
+      .toFloat()
+    return ret
   }
 
   /**
@@ -103,22 +106,22 @@ export class CubismPhysicsJson {
    * @return 風
    */
   public getWind(): CubismVector2 {
-    const ret: CubismVector2 = new CubismVector2(0, 0);
+    const ret: CubismVector2 = new CubismVector2(0, 0)
     ret.x = this._json
       .getRoot()
       .getValueByString(Meta)
       .getValueByString(EffectiveForces)
       .getValueByString(Wind)
       .getValueByString(X)
-      .toFloat();
+      .toFloat()
     ret.y = this._json
       .getRoot()
       .getValueByString(Meta)
       .getValueByString(EffectiveForces)
       .getValueByString(Wind)
       .getValueByString(Y)
-      .toFloat();
-    return ret;
+      .toFloat()
+    return ret
   }
 
   /**
@@ -130,7 +133,7 @@ export class CubismPhysicsJson {
       .getRoot()
       .getValueByString(Meta)
       .getValueByString(Fps)
-      .toFloat(0.0);
+      .toFloat(0.0)
   }
 
   /**
@@ -142,7 +145,7 @@ export class CubismPhysicsJson {
       .getRoot()
       .getValueByString(Meta)
       .getValueByString(PhysicsSettingCount)
-      .toInt();
+      .toInt()
   }
 
   /**
@@ -154,7 +157,7 @@ export class CubismPhysicsJson {
       .getRoot()
       .getValueByString(Meta)
       .getValueByString(TotalInputCount)
-      .toInt();
+      .toInt()
   }
 
   /**
@@ -166,7 +169,7 @@ export class CubismPhysicsJson {
       .getRoot()
       .getValueByString(Meta)
       .getValueByString(TotalOutputCount)
-      .toInt();
+      .toInt()
   }
 
   /**
@@ -178,7 +181,7 @@ export class CubismPhysicsJson {
       .getRoot()
       .getValueByString(Meta)
       .getValueByString(VertexCount)
-      .toInt();
+      .toInt()
   }
 
   /**
@@ -187,7 +190,7 @@ export class CubismPhysicsJson {
    * @return 正規化された位置の最小値
    */
   public getNormalizationPositionMinimumValue(
-    physicsSettingIndex: number
+    physicsSettingIndex: number,
   ): number {
     return this._json
       .getRoot()
@@ -196,7 +199,7 @@ export class CubismPhysicsJson {
       .getValueByString(Normalization)
       .getValueByString(Position)
       .getValueByString(Minimum)
-      .toFloat();
+      .toFloat()
   }
 
   /**
@@ -205,7 +208,7 @@ export class CubismPhysicsJson {
    * @return 正規化された位置の最大値
    */
   public getNormalizationPositionMaximumValue(
-    physicsSettingIndex: number
+    physicsSettingIndex: number,
   ): number {
     return this._json
       .getRoot()
@@ -214,7 +217,7 @@ export class CubismPhysicsJson {
       .getValueByString(Normalization)
       .getValueByString(Position)
       .getValueByString(Maximum)
-      .toFloat();
+      .toFloat()
   }
 
   /**
@@ -223,7 +226,7 @@ export class CubismPhysicsJson {
    * @return 正規化された位置のデフォルト値
    */
   public getNormalizationPositionDefaultValue(
-    physicsSettingIndex: number
+    physicsSettingIndex: number,
   ): number {
     return this._json
       .getRoot()
@@ -232,7 +235,7 @@ export class CubismPhysicsJson {
       .getValueByString(Normalization)
       .getValueByString(Position)
       .getValueByString(Default)
-      .toFloat();
+      .toFloat()
   }
 
   /**
@@ -241,7 +244,7 @@ export class CubismPhysicsJson {
    * @return 正規化された角度の最小値
    */
   public getNormalizationAngleMinimumValue(
-    physicsSettingIndex: number
+    physicsSettingIndex: number,
   ): number {
     return this._json
       .getRoot()
@@ -250,7 +253,7 @@ export class CubismPhysicsJson {
       .getValueByString(Normalization)
       .getValueByString(Angle)
       .getValueByString(Minimum)
-      .toFloat();
+      .toFloat()
   }
 
   /**
@@ -259,7 +262,7 @@ export class CubismPhysicsJson {
    * @return 正規化された角度の最大値
    */
   public getNormalizationAngleMaximumValue(
-    physicsSettingIndex: number
+    physicsSettingIndex: number,
   ): number {
     return this._json
       .getRoot()
@@ -268,7 +271,7 @@ export class CubismPhysicsJson {
       .getValueByString(Normalization)
       .getValueByString(Angle)
       .getValueByString(Maximum)
-      .toFloat();
+      .toFloat()
   }
 
   /**
@@ -277,7 +280,7 @@ export class CubismPhysicsJson {
    * @return 正規化された角度のデフォルト値
    */
   public getNormalizationAngleDefaultValue(
-    physicsSettingIndex: number
+    physicsSettingIndex: number,
   ): number {
     return this._json
       .getRoot()
@@ -286,7 +289,7 @@ export class CubismPhysicsJson {
       .getValueByString(Normalization)
       .getValueByString(Angle)
       .getValueByString(Default)
-      .toFloat();
+      .toFloat()
   }
 
   /**
@@ -300,7 +303,8 @@ export class CubismPhysicsJson {
       .getValueByString(PhysicsSettings)
       .getValueByIndex(physicsSettingIndex)
       .getValueByString(Input)
-      .getVector().length;
+      .getVector()
+      .getSize()
   }
 
   /**
@@ -311,7 +315,7 @@ export class CubismPhysicsJson {
    */
   public getInputWeight(
     physicsSettingIndex: number,
-    inputIndex: number
+    inputIndex: number,
   ): number {
     return this._json
       .getRoot()
@@ -320,7 +324,7 @@ export class CubismPhysicsJson {
       .getValueByString(Input)
       .getValueByIndex(inputIndex)
       .getValueByString(Weight)
-      .toFloat();
+      .toFloat()
   }
 
   /**
@@ -331,7 +335,7 @@ export class CubismPhysicsJson {
    */
   public getInputReflect(
     physicsSettingIndex: number,
-    inputIndex: number
+    inputIndex: number,
   ): boolean {
     return this._json
       .getRoot()
@@ -340,7 +344,7 @@ export class CubismPhysicsJson {
       .getValueByString(Input)
       .getValueByIndex(inputIndex)
       .getValueByString(Reflect)
-      .toBoolean();
+      .toBoolean()
   }
 
   /**
@@ -357,7 +361,7 @@ export class CubismPhysicsJson {
       .getValueByString(Input)
       .getValueByIndex(inputIndex)
       .getValueByString(Type)
-      .getRawString();
+      .getRawString()
   }
 
   /**
@@ -368,7 +372,7 @@ export class CubismPhysicsJson {
    */
   public getInputSourceId(
     physicsSettingIndex: number,
-    inputIndex: number
+    inputIndex: number,
   ): CubismIdHandle {
     return CubismFramework.getIdManager().getId(
       this._json
@@ -379,8 +383,8 @@ export class CubismPhysicsJson {
         .getValueByIndex(inputIndex)
         .getValueByString(Source)
         .getValueByString(Id)
-        .getRawString()
-    );
+        .getRawString(),
+    )
   }
 
   /**
@@ -394,7 +398,8 @@ export class CubismPhysicsJson {
       .getValueByString(PhysicsSettings)
       .getValueByIndex(physicsSettingIndex)
       .getValueByString(Output)
-      .getVector().length;
+      .getVector()
+      .getSize()
   }
 
   /**
@@ -405,7 +410,7 @@ export class CubismPhysicsJson {
    */
   public getOutputVertexIndex(
     physicsSettingIndex: number,
-    outputIndex: number
+    outputIndex: number,
   ): number {
     return this._json
       .getRoot()
@@ -414,7 +419,7 @@ export class CubismPhysicsJson {
       .getValueByString(Output)
       .getValueByIndex(outputIndex)
       .getValueByString(VertexIndex)
-      .toInt();
+      .toInt()
   }
 
   /**
@@ -425,7 +430,7 @@ export class CubismPhysicsJson {
    */
   public getOutputAngleScale(
     physicsSettingIndex: number,
-    outputIndex: number
+    outputIndex: number,
   ): number {
     return this._json
       .getRoot()
@@ -434,7 +439,7 @@ export class CubismPhysicsJson {
       .getValueByString(Output)
       .getValueByIndex(outputIndex)
       .getValueByString(Scale)
-      .toFloat();
+      .toFloat()
   }
 
   /**
@@ -445,7 +450,7 @@ export class CubismPhysicsJson {
    */
   public getOutputWeight(
     physicsSettingIndex: number,
-    outputIndex: number
+    outputIndex: number,
   ): number {
     return this._json
       .getRoot()
@@ -454,7 +459,7 @@ export class CubismPhysicsJson {
       .getValueByString(Output)
       .getValueByIndex(outputIndex)
       .getValueByString(Weight)
-      .toFloat();
+      .toFloat()
   }
 
   /**
@@ -465,7 +470,7 @@ export class CubismPhysicsJson {
    */
   public getOutputDestinationId(
     physicsSettingIndex: number,
-    outputIndex: number
+    outputIndex: number,
   ): CubismIdHandle {
     return CubismFramework.getIdManager().getId(
       this._json
@@ -476,8 +481,8 @@ export class CubismPhysicsJson {
         .getValueByIndex(outputIndex)
         .getValueByString(Destination)
         .getValueByString(Id)
-        .getRawString()
-    );
+        .getRawString(),
+    )
   }
 
   /**
@@ -488,7 +493,7 @@ export class CubismPhysicsJson {
    */
   public getOutputType(
     physicsSettingIndex: number,
-    outputIndex: number
+    outputIndex: number,
   ): string {
     return this._json
       .getRoot()
@@ -497,7 +502,7 @@ export class CubismPhysicsJson {
       .getValueByString(Output)
       .getValueByIndex(outputIndex)
       .getValueByString(Type)
-      .getRawString();
+      .getRawString()
   }
 
   /**
@@ -508,7 +513,7 @@ export class CubismPhysicsJson {
    */
   public getOutputReflect(
     physicsSettingIndex: number,
-    outputIndex: number
+    outputIndex: number,
   ): boolean {
     return this._json
       .getRoot()
@@ -517,7 +522,7 @@ export class CubismPhysicsJson {
       .getValueByString(Output)
       .getValueByIndex(outputIndex)
       .getValueByString(Reflect)
-      .toBoolean();
+      .toBoolean()
   }
 
   /**
@@ -531,7 +536,8 @@ export class CubismPhysicsJson {
       .getValueByString(PhysicsSettings)
       .getValueByIndex(physicsSettingIndex)
       .getValueByString(Vertices)
-      .getVector().length;
+      .getVector()
+      .getSize()
   }
 
   /**
@@ -542,7 +548,7 @@ export class CubismPhysicsJson {
    */
   public getParticleMobility(
     physicsSettingIndex: number,
-    vertexIndex: number
+    vertexIndex: number,
   ): number {
     return this._json
       .getRoot()
@@ -551,7 +557,7 @@ export class CubismPhysicsJson {
       .getValueByString(Vertices)
       .getValueByIndex(vertexIndex)
       .getValueByString(Mobility)
-      .toFloat();
+      .toFloat()
   }
 
   /**
@@ -562,7 +568,7 @@ export class CubismPhysicsJson {
    */
   public getParticleDelay(
     physicsSettingIndex: number,
-    vertexIndex: number
+    vertexIndex: number,
   ): number {
     return this._json
       .getRoot()
@@ -571,7 +577,7 @@ export class CubismPhysicsJson {
       .getValueByString(Vertices)
       .getValueByIndex(vertexIndex)
       .getValueByString(Delay)
-      .toFloat();
+      .toFloat()
   }
 
   /**
@@ -582,7 +588,7 @@ export class CubismPhysicsJson {
    */
   public getParticleAcceleration(
     physicsSettingIndex: number,
-    vertexIndex: number
+    vertexIndex: number,
   ): number {
     return this._json
       .getRoot()
@@ -591,7 +597,7 @@ export class CubismPhysicsJson {
       .getValueByString(Vertices)
       .getValueByIndex(vertexIndex)
       .getValueByString(Acceleration)
-      .toFloat();
+      .toFloat()
   }
 
   /**
@@ -602,7 +608,7 @@ export class CubismPhysicsJson {
    */
   public getParticleRadius(
     physicsSettingIndex: number,
-    vertexIndex: number
+    vertexIndex: number,
   ): number {
     return this._json
       .getRoot()
@@ -611,7 +617,7 @@ export class CubismPhysicsJson {
       .getValueByString(Vertices)
       .getValueByIndex(vertexIndex)
       .getValueByString(Radius)
-      .toFloat();
+      .toFloat()
   }
 
   /**
@@ -622,9 +628,9 @@ export class CubismPhysicsJson {
    */
   public getParticlePosition(
     physicsSettingIndex: number,
-    vertexIndex: number
+    vertexIndex: number,
   ): CubismVector2 {
-    const ret: CubismVector2 = new CubismVector2(0, 0);
+    const ret: CubismVector2 = new CubismVector2(0, 0)
     ret.x = this._json
       .getRoot()
       .getValueByString(PhysicsSettings)
@@ -633,7 +639,7 @@ export class CubismPhysicsJson {
       .getValueByIndex(vertexIndex)
       .getValueByString(Position)
       .getValueByString(X)
-      .toFloat();
+      .toFloat()
     ret.y = this._json
       .getRoot()
       .getValueByString(PhysicsSettings)
@@ -642,17 +648,14 @@ export class CubismPhysicsJson {
       .getValueByIndex(vertexIndex)
       .getValueByString(Position)
       .getValueByString(Y)
-      .toFloat();
-    return ret;
+      .toFloat()
+    return ret
   }
 
-  _json: CubismJson; // physics3.jsonデータ
+  _json: CubismJson // physics3.jsonデータ
 }
-
-// Namespace definition for compatibility.
-import * as $ from './cubismphysicsjson';
 // eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace Live2DCubismFramework {
-  export const CubismPhysicsJson = $.CubismPhysicsJson;
-  export type CubismPhysicsJson = $.CubismPhysicsJson;
+  export const CubismPhysicsJson = $.CubismPhysicsJson
+  export type CubismPhysicsJson = $.CubismPhysicsJson
 }

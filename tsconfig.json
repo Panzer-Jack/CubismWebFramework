@@ -1,17 +1,19 @@
 {
   "compilerOptions": {
     "target": "es6",
-    "moduleResolution": "node",
-    "esModuleInterop": true,
+    "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "forceConsistentCasingInFileNames": true,
-    "outDir": "./dist",
+    "rootDir": "./src",
+    "module": "Node16",
+    "moduleResolution": "Node16",
+    "noImplicitAny": true,
+    "useUnknownInCatchVariables": true,
     "declaration": true,
     "declarationMap": true,
+    "outDir": "./dist",
     "sourceMap": true,
-    "emitDecoratorMetadata": true,
-    "noImplicitAny": true,
-    "useUnknownInCatchVariables": true
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true
   },
   "include": [
     "src/**/*.ts",

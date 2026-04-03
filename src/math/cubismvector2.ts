@@ -10,17 +10,20 @@
  *
  * 2次元ベクトル型の機能を提供する。
  */
+// Namespace definition for compatibility.
+import * as $ from './cubismvector2'
+
 export class CubismVector2 {
   /**
    * コンストラクタ
    */
   public constructor(
     public x?: number,
-    public y?: number
+    public y?: number,
   ) {
-    this.x = x == undefined ? 0.0 : x;
+    this.x = x == undefined ? 0.0 : x
 
-    this.y = y == undefined ? 0.0 : y;
+    this.y = y == undefined ? 0.0 : y
   }
 
   /**
@@ -30,10 +33,10 @@ export class CubismVector2 {
    * @return 加算結果 ベクトル値
    */
   public add(vector2: CubismVector2): CubismVector2 {
-    const ret: CubismVector2 = new CubismVector2(0.0, 0.0);
-    ret.x = this.x + vector2.x;
-    ret.y = this.y + vector2.y;
-    return ret;
+    const ret: CubismVector2 = new CubismVector2(0.0, 0.0)
+    ret.x = this.x + vector2.x
+    ret.y = this.y + vector2.y
+    return ret
   }
 
   /**
@@ -43,10 +46,10 @@ export class CubismVector2 {
    * @return 減算結果 ベクトル値
    */
   public substract(vector2: CubismVector2): CubismVector2 {
-    const ret: CubismVector2 = new CubismVector2(0.0, 0.0);
-    ret.x = this.x - vector2.x;
-    ret.y = this.y - vector2.y;
-    return ret;
+    const ret: CubismVector2 = new CubismVector2(0.0, 0.0)
+    ret.x = this.x - vector2.x
+    ret.y = this.y - vector2.y
+    return ret
   }
 
   /**
@@ -56,10 +59,10 @@ export class CubismVector2 {
    * @return 乗算結果 ベクトル値
    */
   public multiply(vector2: CubismVector2): CubismVector2 {
-    const ret: CubismVector2 = new CubismVector2(0.0, 0.0);
-    ret.x = this.x * vector2.x;
-    ret.y = this.y * vector2.y;
-    return ret;
+    const ret: CubismVector2 = new CubismVector2(0.0, 0.0)
+    ret.x = this.x * vector2.x
+    ret.y = this.y * vector2.y
+    return ret
   }
 
   /**
@@ -69,7 +72,7 @@ export class CubismVector2 {
    * @return 乗算結果 ベクトル値
    */
   public multiplyByScaler(scalar: number): CubismVector2 {
-    return this.multiply(new CubismVector2(scalar, scalar));
+    return this.multiply(new CubismVector2(scalar, scalar))
   }
 
   /**
@@ -79,10 +82,10 @@ export class CubismVector2 {
    * @return 除算結果 ベクトル値
    */
   public division(vector2: CubismVector2): CubismVector2 {
-    const ret: CubismVector2 = new CubismVector2(0.0, 0.0);
-    ret.x = this.x / vector2.x;
-    ret.y = this.y / vector2.y;
-    return ret;
+    const ret: CubismVector2 = new CubismVector2(0.0, 0.0)
+    ret.x = this.x / vector2.x
+    ret.y = this.y / vector2.y
+    return ret
   }
 
   /**
@@ -92,7 +95,7 @@ export class CubismVector2 {
    * @return 除算結果 ベクトル値
    */
   public divisionByScalar(scalar: number): CubismVector2 {
-    return this.division(new CubismVector2(scalar, scalar));
+    return this.division(new CubismVector2(scalar, scalar))
   }
 
   /**
@@ -101,7 +104,7 @@ export class CubismVector2 {
    * @return ベクトルの長さ
    */
   public getLength(): number {
-    return Math.sqrt(this.x * this.x + this.y * this.y);
+    return Math.sqrt(this.x * this.x + this.y * this.y)
   }
 
   /**
@@ -112,8 +115,8 @@ export class CubismVector2 {
    */
   public getDistanceWith(a: CubismVector2): number {
     return Math.sqrt(
-      (this.x - a.x) * (this.x - a.x) + (this.y - a.y) * (this.y - a.y)
-    );
+      (this.x - a.x) * (this.x - a.x) + (this.y - a.y) * (this.y - a.y),
+    )
   }
 
   /**
@@ -123,17 +126,17 @@ export class CubismVector2 {
    * @return 結果
    */
   public dot(a: CubismVector2): number {
-    return this.x * a.x + this.y * a.y;
+    return this.x * a.x + this.y * a.y
   }
 
   /**
    * 正規化の適用
    */
   public normalize(): void {
-    const length: number = Math.pow(this.x * this.x + this.y * this.y, 0.5);
+    const length: number = (this.x * this.x + this.y * this.y) ** 0.5
 
-    this.x = this.x / length;
-    this.y = this.y / length;
+    this.x = this.x / length
+    this.y = this.y / length
   }
 
   /**
@@ -146,7 +149,7 @@ export class CubismVector2 {
    * @return false 値は等しくない
    */
   public isEqual(rhs: CubismVector2): boolean {
-    return this.x == rhs.x && this.y == rhs.y;
+    return this.x == rhs.x && this.y == rhs.y
   }
 
   /**
@@ -159,14 +162,11 @@ export class CubismVector2 {
    * @return false 値は等しい
    */
   public isNotEqual(rhs: CubismVector2): boolean {
-    return !this.isEqual(rhs);
+    return !this.isEqual(rhs)
   }
 }
-
-// Namespace definition for compatibility.
-import * as $ from './cubismvector2';
 // eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace Live2DCubismFramework {
-  export const CubismVector2 = $.CubismVector2;
-  export type CubismVector2 = $.CubismVector2;
+  export const CubismVector2 = $.CubismVector2
+  export type CubismVector2 = $.CubismVector2
 }

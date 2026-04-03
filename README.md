@@ -11,38 +11,35 @@ It is used in conjunction with the Live2D Cubism Core library to load the model.
 
 You can use it as a JavaScript library that can be used in the browser by building.
 
-
 ## License
 
 Please check the [license](LICENSE.md) before using this SDK.
 
+## Compatibility with Cubism 5 new features and previous Cubism SDK versions
 
-## Compatibility with Cubism 5.3 new features and previous Cubism SDK versions
+This SDK is compatible with Cubism 5.
 
-This SDK is compatible with Cubism 5.3.
-For SDK compatibility with new features in Cubism 5.3 Editor, please refer to [here](https://docs.live2d.com/en/cubism-sdk-manual/cubism-5-3-new-functions/).
-For compatibility with previous versions of Cubism SDK, please refer to [here](https://docs.live2d.com/en/cubism-sdk-manual/compatibility-with-cubism-5-3/).
+For SDK compatibility with new features in Cubism 5 Editor, please refer to [here](https://docs.live2d.com/en/cubism-sdk-manual/cubism-5-new-functions/).
 
+For compatibility with previous versions of Cubism SDK, please refer to [here](https://docs.live2d.com/en/cubism-sdk-manual/compatibility-with-cubism-5/).
 
 ## Development environment
 
 ### Node.js
 
-* 25.8.2
-* 24.14.1
-
+- 23.4.0
+- 22.12.0
 
 ### TypeScript
 
-5.9.3
-
+5.7.2
 
 ## Development environment construction
 
 1. Install [Node.js] and [Visual Studio Code]
 1. Open this project in Visual Studio Code and install the recommended extensions
-    * You can check them by typing `@recommended` from the Extensions tab
-1. Enter `>Tasks: Run Task` in the command palette (*View > Command Palette...*) to display the task list
+   - You can check them by typing `@recommended` from the Extensions tab
+1. Enter `>Tasks: Run Task` in the command palette (_View > Command Palette..._) to display the task list
 1. Select `npm: install` to download the dependent packages
 
 You can execute various commands from the task list on the command palette.
@@ -67,18 +64,17 @@ You can change the settings by editing `tsconfig.json`.
 
 Performs static analysis of TypeScript files in the `src` directory.
 
-You can change the settings by editing `eslint.config.mjs`.
+You can change the settings by editing `.eslintrc.yml`.
 
 ### `npm: lint:fix`
 
 Performs static analysis and automatic modification of TypeScript files in the `src` directory.
 
-You can change the settings by editing `eslint.config.mjs`.
+You can change the settings by editing `.eslintrc.yml`.
 
 ### `npm: clean`
 
 Deletes the build deliverable directory (`dist`).
-
 
 ## Components
 
@@ -118,7 +114,6 @@ Provides type definitions for use within the framework.
 
 Provides utility functions such as JSON parser and log output.
 
-
 ## Live2D Cubism Core for Web
 
 Cubism Core for Web is not included in this repository.
@@ -127,23 +122,19 @@ Please download it from the [Cubism SDK for Web].
 
 [Cubism SDK for Web]: https://www.live2d.com/download/cubism-sdk/download-web/
 
-
 ## Samples
 
 Please refer to [CubismWebSamples] for implementation examples of standard applications.
 
 [CubismWebSamples]: https://github.com/Live2D/CubismWebSamples
 
-
 ## Manual
 
 [Cubism SDK Manual](https://docs.live2d.com/cubism-sdk-manual/top/)
 
-
 ## Changelog
 
 Please refer to [CHANGELOG.md](CHANGELOG.md) for the changelog of this repository.
-
 
 ## Contributing
 
@@ -160,7 +151,6 @@ We are regularly checking issue-reports and feature requests at Live2D Community
 ### Suggestions
 
 We're also interested in your feedback for the future of the SDK. You can submit a suggestion or feature request at Live2D Community. To make this process more effective, we're asking that you include more information to help define them more clearly.
-
 
 ## Forum
 

@@ -5,7 +5,11 @@
  * that can be found at https://www.live2d.com/eula/live2d-open-software-license-agreement_en.html.
  */
 
-import { CubismMatrix44 } from './cubismmatrix44';
+import type { csmMap, iterator } from '../type/csmmap'
+import { CubismMatrix44 } from './cubismmatrix44'
+
+// Namespace definition for compatibility.
+import * as $ from './cubismmodelmatrix'
 
 /**
  * モデル座標設定用の4x4行列
@@ -20,12 +24,12 @@ export class CubismModelMatrix extends CubismMatrix44 {
    * @param h 縦幅
    */
   constructor(w?: number, h?: number) {
-    super();
+    super()
 
-    this._width = w !== undefined ? w : 0.0;
-    this._height = h !== undefined ? h : 0.0;
+    this._width = w !== undefined ? w : 0.0
+    this._height = h !== undefined ? h : 0.0
 
-    this.setHeight(2.0);
+    this.setHeight(2.0)
   }
 
   /**
@@ -34,9 +38,9 @@ export class CubismModelMatrix extends CubismMatrix44 {
    * @param w 横幅
    */
   public setWidth(w: number): void {
-    const scaleX: number = w / this._width;
-    const scaleY: number = scaleX;
-    this.scale(scaleX, scaleY);
+    const scaleX: number = w / this._width
+    const scaleY: number = scaleX
+    this.scale(scaleX, scaleY)
   }
 
   /**
@@ -44,9 +48,9 @@ export class CubismModelMatrix extends CubismMatrix44 {
    * @param h 縦幅
    */
   public setHeight(h: number): void {
-    const scaleX: number = h / this._height;
-    const scaleY: number = scaleX;
-    this.scale(scaleX, scaleY);
+    const scaleX: number = h / this._height
+    const scaleY: number = scaleX
+    this.scale(scaleX, scaleY)
   }
 
   /**
@@ -56,7 +60,7 @@ export class CubismModelMatrix extends CubismMatrix44 {
    * @param y Y軸の位置
    */
   public setPosition(x: number, y: number): void {
-    this.translate(x, y);
+    this.translate(x, y)
   }
 
   /**
@@ -68,8 +72,8 @@ export class CubismModelMatrix extends CubismMatrix44 {
    * @note widthかheightを設定したあとでないと、拡大率が正しく取得できないためずれる。
    */
   public setCenterPosition(x: number, y: number) {
-    this.centerX(x);
-    this.centerY(y);
+    this.centerX(x)
+    this.centerY(y)
   }
 
   /**
@@ -78,7 +82,7 @@ export class CubismModelMatrix extends CubismMatrix44 {
    * @param y 上辺のY軸位置
    */
   public top(y: number): void {
-    this.setY(y);
+    this.setY(y)
   }
 
   /**
@@ -87,9 +91,9 @@ export class CubismModelMatrix extends CubismMatrix44 {
    * @param y 下辺のY軸位置
    */
   public bottom(y: number) {
-    const h: number = this._height * this.getScaleY();
+    const h: number = this._height * this.getScaleY()
 
-    this.translateY(y - h);
+    this.translateY(y - h)
   }
 
   /**
@@ -98,7 +102,7 @@ export class CubismModelMatrix extends CubismMatrix44 {
    * @param x 左辺のX軸位置
    */
   public left(x: number): void {
-    this.setX(x);
+    this.setX(x)
   }
 
   /**
@@ -107,9 +111,9 @@ export class CubismModelMatrix extends CubismMatrix44 {
    * @param x 右辺のX軸位置
    */
   public right(x: number): void {
-    const w = this._width * this.getScaleX();
+    const w = this._width * this.getScaleX()
 
-    this.translateX(x - w);
+    this.translateX(x - w)
   }
 
   /**
@@ -118,9 +122,9 @@ export class CubismModelMatrix extends CubismMatrix44 {
    * @param x X軸の中心位置
    */
   public centerX(x: number): void {
-    const w = this._width * this.getScaleX();
+    const w = this._width * this.getScaleX()
 
-    this.translateX(x - w / 2.0);
+    this.translateX(x - w / 2.0)
   }
 
   /**
@@ -129,7 +133,7 @@ export class CubismModelMatrix extends CubismMatrix44 {
    * @param x X軸の位置
    */
   public setX(x: number): void {
-    this.translateX(x);
+    this.translateX(x)
   }
 
   /**
@@ -138,9 +142,9 @@ export class CubismModelMatrix extends CubismMatrix44 {
    * @param y Y軸の中心位置
    */
   public centerY(y: number): void {
-    const h: number = this._height * this.getScaleY();
+    const h: number = this._height * this.getScaleY()
 
-    this.translateY(y - h / 2.0);
+    this.translateY(y - h / 2.0)
   }
 
   /**
@@ -149,7 +153,7 @@ export class CubismModelMatrix extends CubismMatrix44 {
    * @param y Y軸の位置
    */
   public setY(y: number): void {
-    this.translateY(y);
+    this.translateY(y)
   }
 
   /**
@@ -157,61 +161,66 @@ export class CubismModelMatrix extends CubismMatrix44 {
    *
    * @param layout レイアウト情報
    */
-  public setupFromLayout(layout: Map<string, number>): void {
-    const keyWidth = 'width';
-    const keyHeight = 'height';
-    const keyX = 'x';
-    const keyY = 'y';
-    const keyCenterX = 'center_x';
-    const keyCenterY = 'center_y';
-    const keyTop = 'top';
-    const keyBottom = 'bottom';
-    const keyLeft = 'left';
-    const keyRight = 'right';
+  public setupFromLayout(layout: csmMap<string, number>): void {
+    const keyWidth = 'width'
+    const keyHeight = 'height'
+    const keyX = 'x'
+    const keyY = 'y'
+    const keyCenterX = 'center_x'
+    const keyCenterY = 'center_y'
+    const keyTop = 'top'
+    const keyBottom = 'bottom'
+    const keyLeft = 'left'
+    const keyRight = 'right'
 
-    for (const item of layout) {
-      const key: string = item[0];
-      const value: number = item[1];
+    for (
+      const ite: iterator<string, number> = layout.begin();
+      ite.notEqual(layout.end());
+      ite.preIncrement()
+    ) {
+      const key: string = ite.ptr().first
+      const value: number = ite.ptr().second
 
       if (key == keyWidth) {
-        this.setWidth(value);
+        this.setWidth(value)
       } else if (key == keyHeight) {
-        this.setHeight(value);
+        this.setHeight(value)
       }
     }
 
-    for (const item of layout) {
-      const key: string = item[0];
-      const value: number = item[1];
+    for (
+      const ite: iterator<string, number> = layout.begin();
+      ite.notEqual(layout.end());
+      ite.preIncrement()
+    ) {
+      const key: string = ite.ptr().first
+      const value: number = ite.ptr().second
 
       if (key == keyX) {
-        this.setX(value);
+        this.setX(value)
       } else if (key == keyY) {
-        this.setY(value);
+        this.setY(value)
       } else if (key == keyCenterX) {
-        this.centerX(value);
+        this.centerX(value)
       } else if (key == keyCenterY) {
-        this.centerY(value);
+        this.centerY(value)
       } else if (key == keyTop) {
-        this.top(value);
+        this.top(value)
       } else if (key == keyBottom) {
-        this.bottom(value);
+        this.bottom(value)
       } else if (key == keyLeft) {
-        this.left(value);
+        this.left(value)
       } else if (key == keyRight) {
-        this.right(value);
+        this.right(value)
       }
     }
   }
 
-  private _width: number; // 横幅
-  private _height: number; // 縦幅
+  private _width: number // 横幅
+  private _height: number // 縦幅
 }
-
-// Namespace definition for compatibility.
-import * as $ from './cubismmodelmatrix';
 // eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace Live2DCubismFramework {
-  export const CubismModelMatrix = $.CubismModelMatrix;
-  export type CubismModelMatrix = $.CubismModelMatrix;
+  export const CubismModelMatrix = $.CubismModelMatrix
+  export type CubismModelMatrix = $.CubismModelMatrix
 }
